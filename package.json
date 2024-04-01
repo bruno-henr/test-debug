@@ -1,0 +1,16 @@
+{
+  "name": "test-debug",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch ./src/server.js",
+    "test": "node --test ./src/test",
+    "test:coverage": "node --test --experimental-test-coverage ./src/test",
+    "test:debug": "node --inspect --test --watch ./src/test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
