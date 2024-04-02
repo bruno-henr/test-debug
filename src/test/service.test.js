@@ -37,6 +37,38 @@ describe("User", () => {
       password: "123",
       phone_number: "(83) 99337-8760",
     };
-    assert.throws(() => userService.add(user), Error, "Age must be greater than or equal 18 years old");
+    assert.throws(
+      () => userService.add(user),
+      Error,
+      "Age must be greater than or equal 18 years old"
+    );
+  });
+
+  it("not should be able add user with  invalid e-mail", () => {
+    /** @type {IncomingUser} */
+    const user = {
+      full_name: "Bruno Henrique",
+      age: 18,
+      email: null,
+      password: "123",
+      phone_number: "(83) 99337-8760",
+    };
+    const result = () => userService.add(user);
+    assert.throws(result, Error, "Email is not valid");
+  });
+
+  it("not should be able add user with  invalid phone number", () => {
+    /** @type {IncomingUser} */
+    const user = {
+      full_name: "Bruno Henrique",
+      age: 18,
+      email: "brunohenrique@gmail.com",
+      password: "123",
+      phone_number: "83993378760",
+    };
+    const result = () => userService.add(user);
+    assert.throws(result, (error) => {
+      return error instanceof Error && error.message === "Phone is not valid";
+    });
   });
 });
