@@ -1,5 +1,7 @@
 import { UserImplementation } from "../../implementations/UserImplementation.js";
 import "../../types/userTypes.js";
+import { validateEmail } from "../../utils/validateEmail.js";
+import { validatePhoneNumber } from "../../utils/validatePhoneNumber.js";
 export class UserService {
   /**
    * @type {UserImplementation}
@@ -17,6 +19,12 @@ export class UserService {
     }
     if (user.age < 18) {
       throw new Error("Age must be greater than or equal 18 years old");
+    }
+    if (!validateEmail(user.email)) {
+      throw new Error("Email is not valid");
+    }
+    if (!validatePhoneNumber(user.phone_number)) {
+      throw new Error("Phone is not valid");
     }
     this._usersDb.add(user);
     return "user added successfully";
