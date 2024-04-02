@@ -26,13 +26,16 @@ export class UserService {
     if (!validatePhoneNumber(user.phone_number)) {
       throw new Error("Phone is not valid");
     }
-    this._usersDb.add(user);
-    return "user added successfully";
+    const result = this._usersDb.add(user);
+    return result;
   }
   getAll() {
     return this._usersDb.getAll();
   }
   getUserByName(name) {
     return this._usersDb.getUserByName(name);
+  }
+  edit(user) {
+    return this._usersDb.edit(user);
   }
 }

@@ -71,4 +71,30 @@ describe("User", () => {
       return error instanceof Error && error.message === "Phone is not valid";
     });
   });
+
+  it("should be able edit a user", () => {
+    /** @type {IncomingUser} */
+    const userToAdd = {
+      full_name: "Bruno Henrique",
+      age: 23,
+      email: "brunohenrique@gmail.com",
+      password: "123",
+      phone_number: "(83) 99337-8760",
+    };
+    const userAdded =  userService.add(userToAdd);
+    console.log('userAdded => ', userAdded);
+
+    /** @type {IncomingUserEdit} */
+    const user = {
+      full_name: "Bruno Henrique",
+      age: 18,
+      email: "brunohenriquex0@gmail.com",
+      password: "123",
+      phone_number: "83993378760",
+      id: userAdded.id
+    };
+
+    const user_updated = userService.edit(user);
+    assert.strictEqual(user, user_updated)
+  });
 });

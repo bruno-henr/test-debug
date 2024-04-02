@@ -20,6 +20,14 @@ export class UserImplementation {
   }
 
   add(user) {
-    this.users.push({ ...user, id: v4() });
+    const data = { ...user, id: v4() };
+    this.users.push(data);
+    return data;
+  }
+
+  edit(user) {
+    const index = this.users.findIndex(e => e.id === user.id);
+    this.users[index] = user;
+    return user;
   }
 }
